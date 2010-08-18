@@ -2,7 +2,7 @@
 
 ## INTRODUCTION ##
 
-This is a vim configuration created by [duwanis](http://www.duwanis.com
+This  is a vim configuration created by [duwanis](http://www.duwanis.com
 "Duwanis.com"). It includes a few niceties for Ruby/Rails development, as well
 as a few MacVim/Gui specific options -  but is mostly composed of general tools
 to improve the Vim editing experience. The one exception is that this

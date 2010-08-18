@@ -4,7 +4,7 @@
 
 " only execute the contents of this file if the GUI is in use.
 if has("gui_running")
-   set transp=8
+   "set transp=8
   
    "" gui options
    " a - Autoselect
@@ -16,3 +16,6 @@ if has("gui_running")
    set lines=60
    set columns=180
 endif
+
+"No bells!
+set vb t_vb=

@@ -4,7 +4,7 @@
 " Last Modified: 05 October, 2005
 "
 " See ':help tailminusf' for more information.
-"   
+"
 if exists('g:TailMinusF_Loaded')
   finish
 endif

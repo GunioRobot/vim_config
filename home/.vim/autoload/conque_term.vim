@@ -4,20 +4,20 @@
 " VERSION:  1.0, for Vim 7.0
 " LICENSE:
 " Conque - pty interaction in Vim
-" Copyright (C) 2009-2010 Nico Raffo 
+" Copyright (C) 2009-2010 Nico Raffo
 "
 " MIT License
-" 
+"
 " Permission is hereby granted, free of charge, to any person obtaining a copy
 " of this software and associated documentation files (the "Software"), to deal
 " in the Software without restriction, including without limitation the rights
 " to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 " copies of the Software, and to permit persons to whom the Software is
 " furnished to do so, subject to the following conditions:
-" 
+"
 " The above copyright notice and this permission notice shall be included in
 " all copies or substantial portions of the Software.
-" 
+"
 " THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 " IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 " FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -60,12 +60,12 @@ function! conque_term#open(...) "{{{
         let l:config = '{"color":' . string(g:ConqueTerm_Color) . ',"TERM":"' . g:ConqueTerm_TERM . '"}'
         execute 'python ' . b:ConqueTerm_Var . ' = Conque()'
         execute "python " . b:ConqueTerm_Var . ".open('" . conque_term#python_escape(command) . "', " . l:config . ")"
-    catch 
+    catch
         echohl WarningMsg | echomsg "Unable to open command: " . command | echohl None
         return 0
     endtry
 
-    " set buffer mappings and auto commands 
+    " set buffer mappings and auto commands
     call conque_term#set_mappings()
 
     startinsert!
@@ -81,7 +81,7 @@ function! conque_term#set_buffer_settings(command, pre_hooks) "{{{
     endfor
     silent execute "edit " . g:Conque_BufName
 
-    " buffer settings 
+    " buffer settings
     setlocal nocompatible      " conque won't work in compatible mode
     setlocal buftype=nofile    " this buffer is not a file, you can't save it
     setlocal nonumber          " hide line numbers
@@ -163,7 +163,7 @@ function! conque_term#set_mappings() "{{{
     silent execute 'inoremap <silent> <buffer> <Right> <C-o>:python ' . b:ConqueTerm_Var . '.write(u"\u001b[C")<CR>'
     silent execute 'inoremap <silent> <buffer> <Left> <C-o>:python ' . b:ConqueTerm_Var . '.write(u"\u001b[D")<CR>'
 
-    " meta characters 
+    " meta characters
     "for c in split(s:chars_meta, '\zs')
     "    silent execute 'inoremap <silent> <buffer> <M-' . c . '> <Esc>:call conque_term#press_key("<C-v><Esc>' . c . '")<CR>a'
     "endfor
@@ -262,8 +262,8 @@ CONQUE_CTL = {
 #    14 : 'so',  # shift out
 #    15 : 'si'   # shift in
 
-# Escape sequences 
-CONQUE_ESCAPE = { 
+# Escape sequences
+CONQUE_ESCAPE = {
     'm':'font',
     'J':'clear_screen',
     'K':'clear_line',
@@ -322,7 +322,7 @@ CONQUE_ESCAPE_QUESTION = {
 
 CONQUE_ESCAPE_HASH = {
     '8':'screen_alignment_test'
-} 
+}
 #    '3':'double_height_top',
 #    '4':'double_height_bottom',
 #    '5':'single_height_single_width',
@@ -375,7 +375,7 @@ CONQUE_FONT = {
     105: {'description':'Set background color to Magenta', 'attributes': {'ctermbg':'13','guibg':'#990099'}, 'normal':False},
     106: {'description':'Set background color to Cyan', 'attributes': {'ctermbg':'14','guibg':'#009999'}, 'normal':False},
     107: {'description':'Set background color to White', 'attributes': {'ctermbg':'15','guibg':'#ffffff'}, 'normal':False}
-} 
+}
 # }}}
 
 # regular expression matching (almost) all control sequences
@@ -394,7 +394,7 @@ CONQUE_TABLE_OUTPUT   = re.compile("^\s*\|\s.*\s\|\s*$|^\s*\+[=+-]+\+\s*$")
 ###################################################################################################
 class Conque:
 
-    # CLASS PROPERTIES {{{ 
+    # CLASS PROPERTIES {{{
 
     # screen object
     window          = None
@@ -522,13 +522,13 @@ class Conque:
 
                         pass
                     # }}}
-        
+
                 # check for title match {{{
                 elif CONQUE_SEQ_REGEX_TITLE.match(s):
 
                     self.change_title(s[2], s[4:-1])
                     # }}}
-        
+
                 # check for hash match {{{
                 elif CONQUE_SEQ_REGEX_HASH.match(s):
 
@@ -538,7 +538,7 @@ class Conque:
 
                         pass
                     # }}}
-                
+
                 # check for other escape match {{{
                 elif CONQUE_SEQ_REGEX_ESC.match(s):
 
@@ -548,7 +548,7 @@ class Conque:
 
                         pass
                     # }}}
-                
+
                 # else process plain text {{{
                 else:
                     self.plain_text(s)
@@ -725,7 +725,7 @@ class Conque:
     def csi_font(self, csi): # {{{
         if not self.enable_colors:
             return
-        
+
         # defaults to 0
         if len(csi['vals']) == 0:
             csi['vals'] = [0]
@@ -835,7 +835,7 @@ class Conque:
         elif csi['val'] == 0:
             for l in range(self.bound(self.l + 1, 1, self.lines), self.lines + 1):
                 self.screen[l] = ''
-            
+
             # clear end of current line
             self.csi_clear_line(self.parse_csi('K'))
 
@@ -920,16 +920,16 @@ class Conque:
 
     def csi_set(self, csi): # {{{
         # 132 cols
-        if csi['val'] == 3: 
+        if csi['val'] == 3:
             self.csi_clear_screen(self.parse_csi('2J'))
             self.working_columns = 132
 
         # relative_origin
-        elif csi['val'] == 6: 
+        elif csi['val'] == 6:
             self.absolute_coords = False
 
         # set auto wrap
-        elif csi['val'] == 7: 
+        elif csi['val'] == 7:
             self.autowrap = True
 
         self.color_changes = {}
@@ -937,16 +937,16 @@ class Conque:
 
     def csi_reset(self, csi): # {{{
         # 80 cols
-        if csi['val'] == 3: 
+        if csi['val'] == 3:
             self.csi_clear_screen(self.parse_csi('2J'))
             self.working_columns = 80
 
         # absolute origin
-        elif csi['val'] == 6: 
+        elif csi['val'] == 6:
             self.absolute_coords = True
 
         # reset auto wrap
-        elif csi['val'] == 7: 
+        elif csi['val'] == 7:
             self.autowrap = False
 
         self.color_changes = {}
@@ -1045,7 +1045,7 @@ class Conque:
 
     ###############################################################################################
     # Utility {{{
-    
+
     def parse_csi(self, s): # {{{
         attr = { 'key' : s[-1], 'flag' : '', 'val' : 1, 'vals' : [] }
 
@@ -1069,7 +1069,7 @@ class Conque:
 
         if len(attr['vals']) == 1:
             attr['val'] = int(attr['vals'][0])
-            
+
         return attr
         # }}}
 
@@ -1092,7 +1092,7 @@ class ConqueSubprocess:
 
     # process id
     pid = 0
-    
+
     # stdout+stderr file descriptor
     fd = None
 
@@ -1298,7 +1298,7 @@ class ConqueScreen(object):
 
         l = self.screen_top + line - 2
         self.buffer[l:l] = [ value ]
-    
+
     # }}}
     # }}}
 
@@ -1368,7 +1368,7 @@ class ConqueScreen(object):
     def scroll_to_bottom(self): # {{{
         self.window.cursor = (len(self.buffer) - 1, 1)
     # }}}
-        
+
     def align(self): # {{{
         # align bottom of buffer to bottom of screen
         vim.command('normal ' + str(self.screen_height) + 'kG')

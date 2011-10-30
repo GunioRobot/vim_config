@@ -5,7 +5,7 @@
 
 syn match MySQLTableHead "^ *|.*| *$" nextgroup=MySQLTableDivide contains=MySQLTableBar oneline skipwhite skipnl
 syn match MySQLTableBody "^ *|.*| *$" nextgroup=MySQLTableBody,MySQLTableEnd contains=MySQLTableBar,MySQLNull,MySQLBool,MySQLNumber,MySQLStorageClass oneline skipwhite skipnl
-syn match MySQLTableEnd "^ *+[+=-]\++ *$" oneline 
+syn match MySQLTableEnd "^ *+[+=-]\++ *$" oneline
 syn match MySQLTableDivide "^ *+[+=-]\++ *$" nextgroup=MySQLTableBody oneline skipwhite skipnl
 syn match MySQLTableStart "^ *+[+=-]\++ *$" nextgroup=MySQLTableHead oneline skipwhite skipnl
 syn match MySQLTableBar "|" contained
@@ -24,7 +24,7 @@ syn match MySQLPromptLine "^    -> .*$" contains=MySQLKeyword,MySQLPrompt,MySQLS
 syn match MySQLPrompt "^.\?mysql>" contained oneline
 syn match MySQLPrompt "^    ->" contained oneline
 syn case ignore
-syn keyword MySQLKeyword select count max sum avg date show table tables status like as from left right outer inner join contained 
+syn keyword MySQLKeyword select count max sum avg date show table tables status like as from left right outer inner join contained
 syn keyword MySQLKeyword where group by having limit offset order desc asc show contained
 syn case match
 syn region MySQLString start=+'+ end=+'+ skip=+\\'+ contained oneline

@@ -328,7 +328,7 @@ instructions if you're curious on what else it can do, though.
 YankRing adds the equivalent of Emacs' "Kill Ring" to Vim. It wraps Vim's
 default yank/delete mechanisms and allows you to easily work with the last `n`
 items that you've put in Vim's registries - it's sort of a clipboard manager for
-Vim. 
+Vim.
 
 `:help yankring` will give you the full rundown as well as a tutorial.
 

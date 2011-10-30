@@ -17,7 +17,7 @@ or vertical buffer.
 Keys pressed in insert mode will be sent to the shell, along with output from
 the 'p' command in normal mode.
 
-Press the <Esc> key twice to send a single <Esc> to the shell. Pressing this 
+Press the <Esc> key twice to send a single <Esc> to the shell. Pressing this
 key once will leave insert mode like normal.
 
 Press <F9> in any buffer to send a visual selection to the shell.
@@ -30,7 +30,7 @@ Set the following in your .vimrc (default values shown)
 " Enable colors. Setting this to 0 will make your terminal faster.
 let g:ConqueTerm_Color = 1
 
-" Set your terminal type. I strong recommend leaving this as vt100, 
+" Set your terminal type. I strong recommend leaving this as vt100,
 " however more features may be enabled with xterm.
 let g:ConqueTerm_TERM = 'vt100'
 
@@ -43,7 +43,7 @@ let g:ConqueTerm_ReadUnfocused = 1
 
                                                      *conque_term-requirements*
 
-The following minimum requirements are needed to run Conque. Conque will not 
+The following minimum requirements are needed to run Conque. Conque will not
 run on Windows without a Cygwin-like environment.
 
  - Vim 7.1
@@ -70,8 +70,8 @@ The following are known limitations:
    color in your shell, set g:ConqueTerm_Color = 0 in your .vimrc
  - Conque only supports the extended ASCII character set for input, not utf-8.
  - VT100 escape sequence support is not complete.
- - Alt/Meta key support in Vim isn't great in general, and conque is no 
-   exception. Pressing <Esc><Esc>x or <Esc><M-x> instead of <M-x> works in 
+ - Alt/Meta key support in Vim isn't great in general, and conque is no
+   exception. Pressing <Esc><Esc>x or <Esc><M-x> instead of <M-x> works in
    most cases.
 
                                                              *conque_term-todo*
@@ -84,27 +84,27 @@ The following are known limitations:
  - Find a solution to UTF-8 input (See InsertCharPre in Vim todo.txt)
  - Find an alternative to updatetime polling (See Vim todo.txt)
  - Find a graceful solution to Meta key input
- - Windows support 
+ - Windows support
    (See PyConsole http://www.vim.org/scripts/script.php?script_id=1974)
  - Always: look for performance improvements
 
 
                                                        *conque_term-contribute*
 
-The two contributions most in need are improvements to Vim itself. I currently 
-use hacks to simulate a key press event and repeating CursorHold event. The 
-Vim todo.txt document lists proposed improvements to give users this behavior 
+The two contributions most in need are improvements to Vim itself. I currently
+use hacks to simulate a key press event and repeating CursorHold event. The
+Vim todo.txt document lists proposed improvements to give users this behavior
 without hacks. Having a key press event should allow Conque to work with multi-
-byte input. If you are a Vim developer, please consider prioritizing these two 
-items: 
+byte input. If you are a Vim developer, please consider prioritizing these two
+items:
 
  - todo.txt (Autocommands, line ~3137)
-     8   Add an event like CursorHold that is triggered repeatedly, not just 
+     8   Add an event like CursorHold that is triggered repeatedly, not just
          once after typing something.
 
  - todo.txt (Autocommands, proposed event list, line ~3189)
      InsertCharPre   - user typed character Insert mode, before inserting the
-     char.  Pattern is matched with text before the cursor. Set v:char to the 
+     char.  Pattern is matched with text before the cursor. Set v:char to the
      character, can be changed. (not triggered when 'paste' is set).
 
 Bugs, suggestions and patches are all welcome.
@@ -127,7 +127,7 @@ Check out the latest from svn at http://conque.googlecode.com/svn/trunk/
     * No functional changes
 
  - 0.5 / 2009-12-02
-    * Various performance enhancements and bugfixes. 
+    * Various performance enhancements and bugfixes.
     * Rewritten escape sequence processing
 
  - 0.4 / 2009-10-30
